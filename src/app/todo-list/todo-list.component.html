@@ -1,0 +1,57 @@
+<div class="flex w-full h-full">
+  <div class="grid w-full h-full">
+    <div class="col-3">
+      <div class="text-center"></div>
+    </div>
+    <div
+      class="col-6 flex flex-column align-items-center justify-content-center"
+    >
+      <span class="text-3xl font-bold">To-Do List</span>
+      <div class="flex w-full">
+        <input class="flex w-full" [(ngModel)]="todo" type="text" pInputText />
+        <p-button
+          (click)="addTodo()"
+          label="Ekle"
+          styleClass="p-button-secondary"
+        ></p-button>
+      </div>
+
+      <div class="flex w-full">
+        <div class="flex flex-column w-full h-full mt-4">
+          @for (item of todoList; track item.id) {
+          <div class="flex w-full h-full border-1 border-300 solid p-2">
+            <div
+              class="w-full relative p-2 flex justify-content-between align-items-center"
+            >
+              <div
+                class="flex justify-content-center align-items-center column-gap-2"
+              >
+                <p-checkbox
+                  [binary]="true"
+                  inputId="binary"
+                  [(ngModel)]="checked[item.id]"
+                ></p-checkbox>
+              
+                <span   (click)="divCheckbox(item.id)" [ngClass]="{ line: checked[item.id] }">{{
+                  item.task
+                }}</span>
+              </div>
+
+              <p-button
+                (click)="deleteTodo(item.id)"
+                class="absolute right-0"
+                icon="pi pi-times"
+                severity="danger"
+              ></p-button>
+            </div>
+          </div>
+
+          } @empty { }
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class=""></div>
+    </div>
+  </div>
+</div>
